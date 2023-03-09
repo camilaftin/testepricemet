@@ -1,6 +1,6 @@
 import { server } from '../server.js';
 
-export const getProdutos = (_, response) => {
+export const getProdutos = (request, response) => {
     const qu = 'SELECT * FROM produtos';
 
     server.query(qu, (error, data) => {
