@@ -1,8 +1,8 @@
 //import styles from "./Navbar.module.css";
 import './Navibar.scss'
-import { useTheme } from "../hooks/useTheme"
+import { useTheme } from "../contexts/useTheme"
 import { Link, Navigate } from "react-router-dom";
-import { useAuth } from "../contexts/auth";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,14 +11,6 @@ const Navbar = ({ history }) => {
 
   const { theme, changeTheme } = useTheme();
   const navigate = useNavigate();
-
-  const isAuth = !localStorage.getItem('auth')
-  //console.log(!isAuth);  
-
-  const logoutUser = () => {
-    localStorage.removeItem('auth');
-    navigate('/home')
-  }
 
 
   return (
@@ -53,18 +45,6 @@ const Navbar = ({ history }) => {
 
                 <Link to={'/home'} className={`nav-link`}> Home </Link>
 
-
-              </li>
-              <li className={`nav-item navBarLink`}>
-                {isAuth ? (
-                  <a className="nav-link btn btn-dark" href="/login">
-                    Login
-                  </a>
-                ) : (
-                  <a className="nav-link btn btn-light" onClick={logoutUser}>
-                    Logout
-                  </a>
-                )}
 
               </li>
               <li className={`nav-item`}>

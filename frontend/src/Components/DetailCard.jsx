@@ -1,56 +1,61 @@
 import { useEffect, useState } from "react";
-import ScheduleFormModal from "./ScheduleFormModal";
+
 import "./DetailCard.scss";
-import { useTheme } from "../hooks/useTheme"
+import { useTheme } from "../contexts/useTheme"
 
 const DetailCard = (props) => {
   const { theme } = useTheme();
-  const [dentistas, setDentistas] = useState({})
+
+  const [produtos, setProdutos] = useState({})
+
+  console.log(props.id);
+
+
 
 
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api passando o 
-    //id do dentista que está vindo do react-router e carregar os dados em algum estado
-    fetch(`https://dhodonto.ctdprojetos.com.br/dentista?matricula=${props.matricula}`).then(
-      response => {
-        response.json().then(
-          dentistasList => {
-            setDentistas({
-              nome:dentistasList.nome,
-              sobrenome: dentistasList.sobrenome,
-              usuario:dentistasList.usuario.username,
-            })
-          }
-        )
-      }
-    )
+
+    fetch(`http://localhost:8800/produto/${props.id}`)
+      .then(
+        response => {
+          response.json().then(
+            produtoList => {
+              setProdutos({
+                nome: produtoList.nome,
+                descricao: produtoList.descricao,
+                preco: produtoList.preco,
+
+              })
+
+            }
+          )
+        }
+      )
   }, []);
+
+
 
   //console.log(dentistas.usuario.username);
   return (
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
-      <h1>Detalhes sobre o dentista {dentistas.nome} </h1>
+      <h1>Detalhes do produto {produtos.nome} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-        <div className={`card-body row  ${theme=='dark'?'cardDark':''}`}>
+        <div className={`card-body row  ${theme == 'dark' ? 'cardDark' : ''}`}>
           <div className="col-sm-12 col-lg-6">
-            <img
-              className="card-img-top"
-              src="/images/doctor.jpg"
-              alt="doctor placeholder"
-            />
+
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {dentistas.nome}</li>
+              <li className="list-group-item">Nome: {produtos.nome}</li>
               <li className="list-group-item">
-                Sobrenome: {dentistas.sobrenome}
+                Descricao: {produtos.descricao}
               </li>
               <li className="list-group-item">
-                Usuário: {dentistas.usuario}
+                Preco: {produtos.preco}
               </li>
             </ul>
             <div className="text-center">
@@ -67,7 +72,7 @@ const DetailCard = (props) => {
           </div>
         </div>
       </section>
-      <ScheduleFormModal />
+
     </>
   );
 };

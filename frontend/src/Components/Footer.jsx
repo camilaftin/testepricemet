@@ -1,5 +1,5 @@
 import './Footer.scss'
-import { useTheme } from "../hooks/useTheme"
+import { useTheme } from "../contexts/useTheme"
 
 
 const Footer = () => {

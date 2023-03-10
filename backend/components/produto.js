@@ -11,6 +11,23 @@ export const getProdutos = (request, response) => {
     })
 };
 
+export const getProdutoByID = (request, response) => {
+    const id = request.params.id;
+    const qu = "SELECT * FROM produtos WHERE ID = ?";
+
+    server.query(qu, id, (error, data) => {
+        if (error) {
+            return response.json(error);
+        }
+
+        if (data.length === 0) {
+            return response.status(404).json("Produto não encontrado");
+        }
+
+        return response.status(200).json(data[0]);
+    });
+};
+
 export const addProdutos = (request, response) => {
     const qu = "INSERT INTO produtos (`nome`,`descricao`, `preco`) VALUES (?) ";
 
@@ -38,7 +55,7 @@ export const updateProdutos = (request, response) => {
         request.body.preco
     ];
 
-    server.query(qu, [...values, request.params.id], (err) => {
+    server.query(qu, [...values, request.params.id], (error) => {
         if (error) {
             return response.json(error);
         }

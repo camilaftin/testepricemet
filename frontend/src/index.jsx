@@ -3,12 +3,11 @@ import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./Routes/Home";
-import Login from "./Routes/Login";
 import Detail from "./Routes/Detail";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "./hooks/useTheme"
+import { ThemeProvider } from "./contexts/useTheme"
 import { redirect } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth";
 
@@ -33,18 +32,9 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "Login",
-        element: <Login />,
-      },
-      {
-        path: "detail/:matricula",
+        path: "/produto/:id",
         element: <Detail />,
       },
-      {
-        path: "/dentist/:matricula",
-        element: <Detail />,
-      },
-
     ]
   }
 ])
