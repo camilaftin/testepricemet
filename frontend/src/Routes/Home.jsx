@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/Card";
+import AddButton from "../Components/AddButton";
 
 const Home = () => {
 
@@ -32,7 +33,7 @@ const Home = () => {
     <>
       <h1>Home</h1>
 
-
+      <AddButton />
 
       <div className="card-grid container">
 

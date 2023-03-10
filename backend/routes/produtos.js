@@ -7,7 +7,7 @@ router.get('/', getProdutos);
 
 router.get('/produto/:id', getProdutoByID);
 
-router.post('/', addProdutos);
+router.post('/addproduto', addProdutos);
 
 router.put('/:id', updateProdutos);
 

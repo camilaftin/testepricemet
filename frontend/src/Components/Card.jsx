@@ -1,5 +1,5 @@
 import "./Card.scss";
-import { useTheme } from "../contexts/useTheme"
+import { useTheme } from "../contexts/useTheme";
 
 
 const Card = (props) => {
