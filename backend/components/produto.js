@@ -64,9 +64,10 @@ export const updateProdutos = (request, response) => {
 };
 
 export const deleteProdutos = (request, response) => {
-    const qu = "DELETE FROM produtos WHERE `ID` = ? ";
+    const id = request.params.id;
+    const qu = "DELETE FROM produtos WHERE ID = ?";
 
-    server.query(qu, [request.params.id], (err) => {
+    server.query(qu, id, (error) => {
         if (error) {
             return response.json(error);
         }

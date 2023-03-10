@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 import "./DetailCard.scss";
 import { useTheme } from "../contexts/useTheme"
 
 const DetailCard = (props) => {
+
   const { theme } = useTheme();
-
-  const [produtos, setProdutos] = useState({})
-
-  console.log(props.id);
-
-
-
+  const [produtos, setProdutos] = useState({});
+  //console.log(props.id);
+  const [deleteResponse, setDeleteResponse] = useState(null);
 
   useEffect(() => {
-
     fetch(`http://localhost:8800/produto/${props.id}`)
       .then(
         response => {
@@ -31,19 +28,27 @@ const DetailCard = (props) => {
           )
         }
       )
-  }, []);
+  }, [props.id]);
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:8800/produto/delete/${props.id}`)
+      .then((response) => {
+        setDeleteResponse(response.data);
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        setDeleteResponse(error.response.data);
+      });
+  };
 
 
 
-  //console.log(dentistas.usuario.username);
   return (
-    //As instruções que estão com {''} precisam ser 
-    //substituídas com as informações que vem da api
+
     <>
       <h1>Detalhes do produto {produtos.nome} </h1>
       <section className="card col-sm-12 col-lg-6 container">
-        {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
+
         <div className={`card-body row  ${theme == 'dark' ? 'cardDark' : ''}`}>
           <div className="col-sm-12 col-lg-6">
 
@@ -59,14 +64,37 @@ const DetailCard = (props) => {
               </li>
             </ul>
             <div className="text-center">
-              {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-              // está em dark mode e deverá utilizado o css correto */}
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 className={`btn btn-${theme} button `}
               >
-                Marcar consulta
+                Editar
+              </button>
+              <button
+                onClick={() => {
+                  if (window.confirm("Tem certeza que deseja excluir este produto?")) {
+                    fetch(`http://localhost:8800/produto/delete/${props.id}`, {
+                      method: "DELETE",
+                    })
+                      .then((response) => {
+                        if (response.ok) {
+                          alert("Produto excluído com sucesso!");
+                          window.location.href = '/';
+                        } else {
+                          response.json().then((error) => {
+                            alert(`Erro ao excluir produto: ${error.message}`);
+                          });
+                        }
+                      })
+                      .catch((error) => {
+                        alert(`Erro ao excluir produto: ${error.message}`);
+                      });
+                  }
+                }}
+                className={`btn btn-${theme} button `}
+              >
+                Apagar
               </button>
             </div>
           </div>
