@@ -1,7 +1,7 @@
 import { server } from '../server.js';
 
 export const getProdutos = (request, response) => {
-    const qu = 'SELECT * FROM produtos';
+    const qu = "SELECT * FROM produtos";
 
     server.query(qu, (error, data) => {
         if (error) {
@@ -44,6 +44,7 @@ export const addProdutos = (request, response) => {
         return response.status(200).json("Produto cadastrado com sucesso");
     });
 };
+
 
 
 export const updateProdutos = (request, response) => {

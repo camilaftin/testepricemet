@@ -4,8 +4,6 @@ import { useTheme } from "../contexts/useTheme";
 
 const Card = (props) => {
   const { theme } = useTheme();
-  //console.log(props.id);
-
 
   return (
     <>

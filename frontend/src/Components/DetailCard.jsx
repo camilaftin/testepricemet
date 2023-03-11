@@ -31,13 +31,16 @@ const DetailCard = (props) => {
   }, [props.id]);
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:8800/produto/delete/${props.id}`)
-      .then((response) => {
-        setDeleteResponse(response.data);
+    fetch(`http://localhost:8800/produto/delete/${props.id}`, {
+      method: "DELETE"
+    })
+      .then(response => response.json())
+      .then(data => {
+        setDeleteResponse(data);
         window.location.href = '/';
       })
-      .catch((error) => {
-        setDeleteResponse(error.response.data);
+      .catch(error => {
+        setDeleteResponse(error);
       });
   };
 
@@ -48,19 +51,22 @@ const DetailCard = (props) => {
     <>
       <h1>Detalhes do produto {produtos.nome} </h1>
       <section className="card col-sm-12 col-lg-6 container">
-
         <div className={`card-body row  ${theme == 'dark' ? 'cardDark' : ''}`}>
           <div className="col-sm-12 col-lg-6">
-
+            <img
+              className="card-img-top"
+              src="/images/fantasy.jpg"
+              alt="Produto"
+            />
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
               <li className="list-group-item">Nome: {produtos.nome}</li>
               <li className="list-group-item">
-                Descricao: {produtos.descricao}
+                Descrição: {produtos.descricao}
               </li>
               <li className="list-group-item">
-                Preco: {produtos.preco}
+                Preço: {produtos.preco}
               </li>
             </ul>
             <div className="text-center">
@@ -100,7 +106,6 @@ const DetailCard = (props) => {
           </div>
         </div>
       </section>
-
     </>
   );
 };

@@ -12,8 +12,6 @@ const Home = () => {
         response.json().then(
           produtosList => {
             setProdutos(produtosList);
-            //console.log(produtosList);
-
           }
 
         )
@@ -21,13 +19,6 @@ const Home = () => {
     )
   }, []);
 
-  produtos.map((itens) => {
-    //console.log(itens)
-    //console.log(itens.ID)
-    /*console.log(itens.nome)
-    console.log(itens.descricao)
-    console.log(itens.preco)*/
-  })
 
   return (
     <>

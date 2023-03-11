@@ -10,7 +10,7 @@ import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./contexts/useTheme"
 import { redirect } from "react-router-dom";
-import { AuthProvider } from "./contexts/auth";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -49,10 +49,8 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
