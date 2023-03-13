@@ -7,14 +7,9 @@ const Detail = () => {
 
   console.log(id);
 
-
-
-
-
   return (
     <>
       <DetailCard id={id} />
-
     </>
   )
 }

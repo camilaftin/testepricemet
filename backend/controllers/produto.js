@@ -37,7 +37,7 @@ export const addProdutos = (request, response) => {
         request.body.preco
     ];
 
-    server.query(qu, [values], (err) => {
+    server.query(qu, [values], (error) => {
         if (error) {
             return response.json(error);
         }
@@ -48,7 +48,8 @@ export const addProdutos = (request, response) => {
 
 
 export const updateProdutos = (request, response) => {
-    const qu = "UPDATE produtos SET `nome` = ?,`descricao` = ?, `preco` = ? WHERE `ID` = ? ";
+    const id = request.params.id;
+    const qu = "UPDATE produtos SET `nome` = ?, `descricao` = ?, `preco` = ? WHERE `ID` = ? ";
 
     const values = [
         request.body.nome,
@@ -56,7 +57,7 @@ export const updateProdutos = (request, response) => {
         request.body.preco
     ];
 
-    server.query(qu, [...values, request.params.id], (error) => {
+    server.query(qu, [...values, id], (error) => {
         if (error) {
             return response.json(error);
         }

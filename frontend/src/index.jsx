@@ -5,6 +5,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./Routes/Home";
 import Detail from "./Routes/Detail";
 import AdicionarProduto from "./Routes/AdicionarProduto";
+import EditarProduto from "./Routes/EditarProduto";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/addproduto",
         element: <AdicionarProduto />,
+      },
+      {
+        path: "/produto/updateproduto/:id",
+        element: <EditarProduto />,
       }
 
     ]

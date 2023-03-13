@@ -1,15 +1,15 @@
-import "./AddButton.scss";
+import "./UpdateButton.scss";
 import { useTheme } from "../contexts/useTheme";
 
 import { Link } from "react-router-dom";
 
-const AddButton = () => {
+const UpdateButton = () => {
   const { theme } = useTheme();
 
   return (
     <div className="text-center mt-4">
-      <Link to="/addproduto" className={`btn btn-${theme} button `}>
-        Adicionar Produto
+      <Link to="/produto/updateproduto/" className={`btn btn-${theme} button `}>
+        Editar
       </Link>
 
     </div>
@@ -17,4 +17,4 @@ const AddButton = () => {
   );
 };
 
-export default AddButton;
+export default UpdateButton;

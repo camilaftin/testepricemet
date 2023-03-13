@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-
+import UpdateButton from "../Components/UpdateButton";
 import "./DetailCard.scss";
 import { useTheme } from "../contexts/useTheme"
 
@@ -8,7 +8,6 @@ const DetailCard = (props) => {
 
   const { theme } = useTheme();
   const [produtos, setProdutos] = useState({});
-  //console.log(props.id);
   const [deleteResponse, setDeleteResponse] = useState(null);
 
   useEffect(() => {
@@ -70,13 +69,7 @@ const DetailCard = (props) => {
               </li>
             </ul>
             <div className="text-center">
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                className={`btn btn-${theme} button `}
-              >
-                Editar
-              </button>
+              <div id="btn-edit"><UpdateButton /></div>
               <button
                 onClick={() => {
                   if (window.confirm("Tem certeza que deseja excluir este produto?")) {
