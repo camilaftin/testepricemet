@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
-import UpdateButton from "../Components/UpdateButton";
+
 import "./DetailCard.scss";
 import { useTheme } from "../contexts/useTheme"
 
@@ -69,7 +68,7 @@ const DetailCard = (props) => {
               </li>
             </ul>
             <div className="text-center">
-              <div id="btn-edit"><UpdateButton /></div>
+              <button className={`btn btn-${theme} button `}><a href={`/produto/update/${props.id}`}>Editar</a></button>
               <button
                 onClick={() => {
                   if (window.confirm("Tem certeza que deseja excluir este produto?")) {

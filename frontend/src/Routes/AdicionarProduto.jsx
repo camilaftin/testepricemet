@@ -17,13 +17,13 @@ const AdicionarProduto = () => {
 
     event.preventDefault();
 
-    const requestOptions = {
+    const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nome, descricao, preco }),
     };
 
-    fetch("http://localhost:8800/addproduto", requestOptions)
+    fetch("http://localhost:8800/addproduto", request)
       .then((response) => {
         if (response.ok) {
           alert("Produto incluido com sucesso!");

@@ -1,11 +1,13 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useTheme } from "../contexts/useTheme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
-const EditarProduto = (props) => {
+const EditarProduto = () => {
 
+  const { id } = useParams();
   const { theme } = useTheme();
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -15,7 +17,7 @@ const EditarProduto = (props) => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:8800/produto/${props.id}`)
+    fetch(`http://localhost:8800/produto/${id}`)
       .then((response) => response.json())
       .then((produto) => {
         setNome(produto.nome);
@@ -25,7 +27,7 @@ const EditarProduto = (props) => {
       .catch((error) => {
         setMensagem("Ocorreu um erro ao carregar o produto.");
       });
-  }, [props.id]);
+  }, [id]);
 
   const handleNomeChange = (event) => {
     setNome(event.target.value);
@@ -41,30 +43,29 @@ const EditarProduto = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-
     const produto = {
       nome: nome,
       descricao: descricao,
       preco: preco,
     };
 
-    fetch(`http://localhost:8800/produto/updateproduto/${props.id}`, {
-      method: 'PUT',
+    console.log(produto);
+
+    fetch(`http://localhost:8800/produto/update/${id}`, {
+      method: "PUT",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(produto)
+
     })
       .then(response => {
         if (response.ok) {
-          setMensagem("Produto atualizado com sucesso");
+          alert("Produto alterado com sucesso!");
+          window.location.href = '/';
         } else {
           setMensagem("Erro ao atualizar");
         }
-      })
-      .catch(error => {
-        setMensagem("Erro ao atualizar o produto");
       });
   };
 
@@ -103,6 +104,7 @@ const EditarProduto = (props) => {
         </div>
         <div className="text-center mt-4">
           <button className={`btn btn-${theme} button `} type="submit">Salvar</button> </div>
+        {mensagem && <p style={{ color: 'red', fontWeight: 'bold' }}>{mensagem}</p>}
       </form>
     </div>
   );

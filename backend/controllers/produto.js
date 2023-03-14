@@ -49,7 +49,8 @@ export const addProdutos = (request, response) => {
 
 export const updateProdutos = (request, response) => {
     const id = request.params.id;
-    const qu = "UPDATE produtos SET `nome` = ?, `descricao` = ?, `preco` = ? WHERE `ID` = ? ";
+
+    const qu = 'UPDATE produtos SET nome = ?, descricao = ?, preco = ? WHERE id = ?';
 
     const values = [
         request.body.nome,
@@ -64,6 +65,8 @@ export const updateProdutos = (request, response) => {
         return response.status(200).json("Produto alterado com sucesso");
     });
 };
+
+
 
 export const deleteProdutos = (request, response) => {
     const id = request.params.id;
