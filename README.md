@@ -1,8 +1,8 @@
 # testepricemet
 
-[![Express JS][expressjs.com]][Expressjs-url]
-[![React][reactjs.org]][React-url]
-[![MySQL][mysql.com]][MySQL-url]
+- [x] Node Express
+- [x] React
+- [x] MySQL
 
 ## :newspaper: Teste
 
